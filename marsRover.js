@@ -2,66 +2,57 @@
 
 const myRoverMovement = inputInstructions => {
     if (inputInstructions === undefined) throw new Error("Instructions are required");
-
-    let arr = [inputInstructions.boundary[0],   // arr[0] - Outer boundary 'x' coordinate
-    inputInstructions.boundary[1],              // arr[1] - Outer boundary 'y' coordinate
-    inputInstructions.movementInstructions,             // arr[2] - Movement Instruction set
-    inputInstructions.myRover[0],               // arr[3] - myRover 'X' Coordinate  
-    inputInstructions.myRover[1],               // arr[4] - myRover 'Y' Coordinate 
-    inputInstructions.myRover[2],                       // arr[5] - myRover current facing direction
-    inputInstructions.otherRovers                       // arr[6] - Other Rovers coordinates to check clashes/obstacles 
-    ];
-
     let err = 0;
-    for (let i = 0; i < arr[2].length; i++) {
-        switch (arr[2][i]) {
-            case "L": myRoverFaceChange('L', arr); break;
-            case "R": myRoverFaceChange('R', arr); break;
-            case "M": err = myRoverFaceChange('M', arr); if (err > 0) return "I am Doomed... Save Me!!"; else break;
+    for (let i = 0; i < inputInstructions.movementInstructions.length; i++) {
+        switch (inputInstructions.movementInstructions[i]) {
+            case "L": myRoverFaceChange('L', inputInstructions); break;
+            case "R": myRoverFaceChange('R', inputInstructions); break;
+            case "M": err = myRoverFaceChange('M', inputInstructions); if (err > 0) return "I am Doomed... Save Me!!"; else break;
         };
     };
-    return [arr[3],arr[4],arr[5]];
+    return [inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.myRover[2]];
 };
 
-const myRoverFaceChange = (roverMovement, arr, err = 0) => {
-    switch (arr[5]) {
+const myRoverFaceChange = (roverMovement, inputInstructions, err = 0) => {
+    switch (inputInstructions.myRover[2]) {
         case "N":
-            roverMovement === 'L' ? arr[5] = "W" :
-                roverMovement === 'R' ? arr[5] = "E" :
+            roverMovement === 'L' ? inputInstructions.myRover[2] = "W" :
+                roverMovement === 'R' ? inputInstructions.myRover[2] = "E" :
                     roverMovement === 'M' ? (
-                        arr[4] += 1,
-                        err = errorCheck(arr[0], arr[1], arr[3], arr[4], arr[6])) :
-                        err = "Incorrect Movement Instructions";
+                        inputInstructions.myRover[1] += 1,
+                        err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
+                        err++;
             return err;
         case "S":
-            roverMovement === 'L' ? arr[5] = "E" :
-                roverMovement === 'R' ? arr[5] = "W" :
+            roverMovement === 'L' ? inputInstructions.myRover[2] = "E" :
+                roverMovement === 'R' ? inputInstructions.myRover[2] = "W" :
                     roverMovement === 'M' ? (
-                        arr[4] -= 1,
-                        err = errorCheck(arr[0], arr[1], arr[3], arr[4], arr[6])) :
-                        err = "Incorrect Movement Instructions";
+                        inputInstructions.myRover[1] -= 1,
+                        err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
+                        err++;
             return err;
         case "E":
-            roverMovement === 'L' ? arr[5] = "N" :
-                roverMovement === 'R' ? arr[5] = "S" :
+            roverMovement === 'L' ? inputInstructions.myRover[2] = "N" :
+                roverMovement === 'R' ? inputInstructions.myRover[2] = "S" :
                     roverMovement === 'M' ? (
-                        arr[3] += 1,
-                        err = errorCheck(arr[0], arr[1], arr[3], arr[4], arr[6])) :
-                        err = "Incorrect Movement Instructions";
+                        inputInstructions.myRover[0] += 1,
+                        err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
+                        err++;
             return err;
         case "W":
-            roverMovement === 'L' ? arr[5] = "S" :
-                roverMovement === 'R' ? arr[5] = "N" :
+            roverMovement === 'L' ? inputInstructions.myRover[2] = "S" :
+                roverMovement === 'R' ? inputInstructions.myRover[2] = "N" :
                     roverMovement === 'M' ? (
-                        arr[3] -= 1,
-                        err = errorCheck(arr[0], arr[1], arr[3], arr[4], arr[6])) :
-                        err = "Incorrect Movement Instructions";
+                        inputInstructions.myRover[0] -= 1,
+                        err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
+                        err++;
             return err;
         default:
-            return "Not a Valid Movement ";
+            return err++;
     }
 };
 
+// Check if myRover is on the Plateau (not falling off the boundary) and not clashing with any other Rover
 const errorCheck = (boundaryX, boundaryY, myRoverX, myRoverY, obstacles, err = 0) => {
     (0 <= myRoverX <= boundaryX && 0 <= myRoverY <= boundaryY) ? err : err++;
     for (let j = 0; j < obstacles.length; j++)
