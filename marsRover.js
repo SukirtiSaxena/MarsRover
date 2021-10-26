@@ -1,13 +1,24 @@
 
+// Defining Constant Values
+const Move = { Left: 'L',  Right: 'R',  Move: 'M'   };
+const Direction = { North:'N', South:'S', East:'E',  West:'W'   };
+
 
 const myRoverMovement = inputInstructions => {
+    // Input Error Checks
     if (inputInstructions === undefined) throw new Error("Instructions are required");
+    if (inputInstructions.boundary[0] < 0 || inputInstructions.boundary[1] < 0 || inputInstructions.myRover[0] < 0 || inputInstructions.myRover[1] < 0) 
+        return "Input should be in positive coordinates";
+    for(let i= 0; i < inputInstructions.movementInstructions.length; i++)
+        if(![Move.Right, Move.Move, Move.Left].includes(inputInstructions.movementInstructions[i])) return "Not a valid movement instruction";
+
+    // Movement based on Input instructions    
     let err = 0;
     for (let i = 0; i < inputInstructions.movementInstructions.length; i++) {
         switch (inputInstructions.movementInstructions[i]) {
-            case "L": myRoverFaceChange('L', inputInstructions); break;
-            case "R": myRoverFaceChange('R', inputInstructions); break;
-            case "M": err = myRoverFaceChange('M', inputInstructions); if (err > 0) return "I am Doomed... Save Me!!"; else break;
+            case Move.Left : myRoverFaceChange(Move.Left, inputInstructions); break;
+            case Move.Right: myRoverFaceChange(Move.Right, inputInstructions); break;
+            case Move.Move: err = myRoverFaceChange(Move.Move, inputInstructions); if (err > 0) return "I am Doomed... Save Me!!"; else break;
         };
     };
     return [inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.myRover[2]];
@@ -15,34 +26,34 @@ const myRoverMovement = inputInstructions => {
 
 const myRoverFaceChange = (roverMovement, inputInstructions, err = 0) => {
     switch (inputInstructions.myRover[2]) {
-        case "N":
-            roverMovement === 'L' ? inputInstructions.myRover[2] = "W" :
-                roverMovement === 'R' ? inputInstructions.myRover[2] = "E" :
-                    roverMovement === 'M' ? (
+        case Direction.North:
+            roverMovement === Move.Left ? inputInstructions.myRover[2] = Direction.West :
+                roverMovement === Move.Right ? inputInstructions.myRover[2] = Direction.East :
+                    roverMovement === Move.Move ? (
                         inputInstructions.myRover[1] += 1,
                         err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
                         err++;
             return err;
-        case "S":
-            roverMovement === 'L' ? inputInstructions.myRover[2] = "E" :
-                roverMovement === 'R' ? inputInstructions.myRover[2] = "W" :
-                    roverMovement === 'M' ? (
+        case Direction.South:
+            roverMovement === Move.Left ? inputInstructions.myRover[2] = Direction.East :
+                roverMovement === Move.Right ? inputInstructions.myRover[2] = Direction.West :
+                    roverMovement === Move.Move ? (
                         inputInstructions.myRover[1] -= 1,
                         err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
                         err++;
             return err;
-        case "E":
-            roverMovement === 'L' ? inputInstructions.myRover[2] = "N" :
-                roverMovement === 'R' ? inputInstructions.myRover[2] = "S" :
-                    roverMovement === 'M' ? (
+        case Direction.East:
+            roverMovement === Move.Left ? inputInstructions.myRover[2] = Direction.North :
+                roverMovement === Move.Right ? inputInstructions.myRover[2] = Direction.South :
+                    roverMovement === Move.Move ? (
                         inputInstructions.myRover[0] += 1,
                         err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
                         err++;
             return err;
-        case "W":
-            roverMovement === 'L' ? inputInstructions.myRover[2] = "S" :
-                roverMovement === 'R' ? inputInstructions.myRover[2] = "N" :
-                    roverMovement === 'M' ? (
+        case Direction.West:
+            roverMovement === Move.Left ? inputInstructions.myRover[2] = Direction.South :
+                roverMovement === Move.Right ? inputInstructions.myRover[2] = Direction.North :
+                    roverMovement === Move.Move ? (
                         inputInstructions.myRover[0] -= 1,
                         err = errorCheck(inputInstructions.boundary[0], inputInstructions.boundary[1], inputInstructions.myRover[0], inputInstructions.myRover[1], inputInstructions.otherRovers)) :
                         err++;

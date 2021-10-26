@@ -1,7 +1,3 @@
-
-//const { readFileSync } = require('fs');
-//const array = readFileSync('MarsRoverInputFile.txt', 'utf8').split('\r\n');
-
 const { myRoverMovement } = require("./marsRover.js");
 
 describe("myRoverMovement", () => {
@@ -45,5 +41,34 @@ describe("myRoverMovement", () => {
         };
         expect(myRoverMovement(inputInstructions)).toEqual([5, 1, 'E']);
     });
+    
+    test("If invalid character in instructions set, send 'Not a valid movement instruction' message ", () => {
+        const inputInstructions = {
+            boundary: [5, 5],
+            myRover: [5, 5, 'N'],
+            movementInstructions: 'LMLMLMLKMM',
+            otherRovers: [[5, 0], [4, 5]]
+        };
+        expect(myRoverMovement(inputInstructions)).toEqual("Not a valid movement instruction");
+    });
 
+    test("If  negative input for boundary coordinates, send 'Boundary limit should be in positive coordinates' message ", () => {
+        const inputInstructions = {
+            boundary: [-5, 5],
+            myRover: [5, 2, 'N'],
+            movementInstructions: 'LMLMLMLKMM',
+            otherRovers: [[5, 0], [4, 5]]
+        };
+        expect(myRoverMovement(inputInstructions)).toEqual("Input should be in positive coordinates");
+    });
+
+    test("If  negative input for current Rover coordinates, send 'MyRover coordinates should be positive ' message ", () => {
+        const inputInstructions = {
+            boundary: [5, 5],
+            myRover: [5, -4, 'N'],
+            movementInstructions: 'LMLMLMLKMM',
+            otherRovers: [[5, 0], [4, 5]]
+        };
+        expect(myRoverMovement(inputInstructions)).toEqual("Input should be in positive coordinates");
+    });
 });
