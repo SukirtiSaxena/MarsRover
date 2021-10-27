@@ -1,20 +1,16 @@
 
-// Defining Constant Values
-const Move = { Left: 'L',  Right: 'R',  Move: 'M'   };
-const Direction = { North:'N', South:'S', East:'E',  West:'W'   };
-
+const { Move,Direction} = require("./marsRoverConstants.js");
 
 const myRoverMovement = inputInstructions => {
     // Input Error Checks
     if (inputInstructions === undefined) throw new Error("Instructions are required");
     if (inputInstructions.boundary[0] < 0 || inputInstructions.boundary[1] < 0 || inputInstructions.myRover[0] < 0 || inputInstructions.myRover[1] < 0) 
         return "Input should be in positive coordinates";
-    for(let i= 0; i < inputInstructions.movementInstructions.length; i++)
-        if(![Move.Right, Move.Move, Move.Left].includes(inputInstructions.movementInstructions[i])) return "Not a valid movement instruction";
 
     // Movement based on Input instructions    
     let err = 0;
     for (let i = 0; i < inputInstructions.movementInstructions.length; i++) {
+        if(![Move.Right, Move.Move, Move.Left].includes(inputInstructions.movementInstructions[i])) return "Not a valid movement instruction";
         switch (inputInstructions.movementInstructions[i]) {
             case Move.Left : myRoverFaceChange(Move.Left, inputInstructions); break;
             case Move.Right: myRoverFaceChange(Move.Right, inputInstructions); break;
@@ -59,7 +55,7 @@ const myRoverFaceChange = (roverMovement, inputInstructions, err = 0) => {
                         err++;
             return err;
         default:
-            return err++;
+            return err;
     }
 };
 

@@ -45,7 +45,7 @@ describe("myRoverMovement", () => {
     test("If invalid character in instructions set, send 'Not a valid movement instruction' message ", () => {
         const inputInstructions = {
             boundary: [5, 5],
-            myRover: [5, 5, 'N'],
+            myRover: [1, 2, 'N'],
             movementInstructions: 'LMLMLMLKMM',
             otherRovers: [[5, 0], [4, 5]]
         };
@@ -56,7 +56,7 @@ describe("myRoverMovement", () => {
         const inputInstructions = {
             boundary: [-5, 5],
             myRover: [5, 2, 'N'],
-            movementInstructions: 'LMLMLMLKMM',
+            movementInstructions: 'LMLMLMLMM',
             otherRovers: [[5, 0], [4, 5]]
         };
         expect(myRoverMovement(inputInstructions)).toEqual("Input should be in positive coordinates");
@@ -66,7 +66,7 @@ describe("myRoverMovement", () => {
         const inputInstructions = {
             boundary: [5, 5],
             myRover: [5, -4, 'N'],
-            movementInstructions: 'LMLMLMLKMM',
+            movementInstructions: 'LMLMLMLMM',
             otherRovers: [[5, 0], [4, 5]]
         };
         expect(myRoverMovement(inputInstructions)).toEqual("Input should be in positive coordinates");
