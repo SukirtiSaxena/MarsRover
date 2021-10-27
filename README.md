@@ -40,22 +40,31 @@ Rovers move sequentially, this means that the first Rover needs to finish moving
 
 
 OUTPUT
+
 For each Rover, the output represents its final position (final coordinates and where it is facing).
 
 Example Test Case :
 Lines of Input to the Program:
+
 5 5
+
 1 2 N
+
 LMLMLMLMM
+
 3 3 E
+
 MMRMMRMRRM
 
 Expected Output:
+
 1 3 N
+
 5 1 E
 
 
 SOLUTION
+
 This 'Mars Rover Kata' task has been done in JavaScript.
 1. Get the boundary position for checking, if myRover is on the plateau and not falling off.
 2. Get myRover current cordinates and facing direction.
@@ -98,8 +107,7 @@ const array = readFileSync('MarsRoverInputFile.txt', 'utf8').split('\r\n'); // r
             break;
         }
     }
-
-  ------------------------test taking input from file -------------------
+  // ------------------------test taking input from file -------------------
     test("Read input position  from file and give output position ", () => {
         const inputInstructions = {
             boundary: array[0].split(" "),
@@ -115,14 +123,18 @@ const array = readFileSync('MarsRoverInputFile.txt', 'utf8').split('\r\n'); // r
 
 ## Technologies
 npm  : Vesrion 6.14.15
+
 jest : Version 27.3.1
 
 
 
 ## Installation
 $ git clone https://github.com/SukirtiSaxena/MarsRover.git
+
 $ cd MarsRoverTask
+
 $ npm install
+
 $ npm start
 
 
