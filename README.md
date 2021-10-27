@@ -66,24 +66,41 @@ Expected Output:
 SOLUTION
 
 This 'Mars Rover Kata' task has been done in JavaScript.
+
 1. Get the boundary position for checking, if myRover is on the plateau and not falling off.
+
 2. Get myRover current cordinates and facing direction.
+
 3. Loop through the Movement instructions String.
+
 4. If 'L' change direction to 90 degree left
+
    If 'R' change direction to 90 degree right
+
    If 'M' , check for boundary conditions and for any collisions, if all ok, move 1 grid point towards current direction.
+
 5. Return the final coordinates and direction of myRover.
+
 6. Repeate for next Rover.
 
-Unit Test cases:
+
+UNIT TEST CASES:
+
 Unit test cases are provided in marsRover.test.js
-    √ Read input position and give output position for Rover 1.
-    √ Read input position and give output position for Rover 2.
-    √ If another Rover in the way send 'I am doomed' message.
-    √ If  myRover falling off the plateau, send 'I am doomed' message.
-    √ If invalid character in instructions set, send 'Not a valid movement instruction' message.
-    √ If  negative input for boundary coordinates, send 'Boundary limit should be in positive coordinates' message.
-    √ If  negative input for current Rover coordinates, send 'MyRover coordinates should be positive ' message.
+ 
+ √ Read input position and give output position for Rover 1.
+ 
+ √ Read input position and give output position for Rover 2.
+ 
+ √ If another Rover in the way send 'I am doomed' message.
+ 
+ √ If  myRover falling off the plateau, send 'I am doomed' message.
+ 
+ √ If invalid character in instructions set, send 'Not a valid movement instruction' message.
+ 
+ √ If  negative input for boundary coordinates, send 'Boundary limit should be in positive coordinates' message.
+ 
+ √ If  negative input for current Rover coordinates, send 'MyRover coordinates should be positive ' message.
 
 ASSUMPTION
 1. Plateau is rectangular / square.
