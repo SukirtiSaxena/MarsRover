@@ -13,13 +13,13 @@ describe("myRoverMovement", () => {
     boundary = [parseInt(boundary[0]), parseInt(boundary[1])];
 
     each([
-        [i = 1, [1, 3, 'N']],                               //Read input position and give output position : i = input line from file, Expected Output = [1,3,'N']
-        [i = 3, [5, 1, 'E']],                               // Read input position and give output position
-        [i = 5, 'I am Doomed... Save Me!!'],                // Another Rover in my way
-        [i = 7, 'Input should be in positive coordinates'], // negative input for current Rover coordinates
-        [i = 9, 'I am Doomed... Save Me!!'],                // myRover falling off the plateau
-        [i = 11, 'Not a valid movement instruction']        // If incorrect movement instructions
-    ]).test('Read input position and give output position, if incorrect input throw error', (i, expected) => {
+        [i = 1, [1, 3, 'N']],                                                   //Read input position and give output position : i = input line from file, Expected Output = [1,3,'N']
+        [i = 3, [5, 1, 'E']],                                                   // Read input position and give output position
+        [i = 5, 'I am Doomed... Save Me!!'],                                    // Another Rover in my way
+        [i = 7, 'MyRover can not be placed outside the plateau boundary'],      // negative input for current Rover coordinates
+        [i = 9, 'I am Doomed... Save Me!!'],                                    // myRover falling off the plateau
+        [i = 11, 'Not a valid movement instruction']                            // If incorrect movement instructions
+    ]).test('Read input position and give output position, if incorrect input, throw error', (i, expected) => {
 
         let currentRover = inputValues[i].split(" ");
         currentRover = [parseInt(currentRover[0]), parseInt(currentRover[1]), currentRover[2]];
