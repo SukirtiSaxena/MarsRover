@@ -27,8 +27,8 @@ describe("myRoverMovement", () => {
 
     // Tests for correct input
     each([
-        [i = 1, [1, 3, 'N']],                                                   //Read input position and give output position : i = input line from file, Expected Output = [1,3,'N']
-        [i = 3, [5, 1, 'E']],                                                   // Read input position and give output position
+        [i = 1, [1, 3, 'N']],                     //Read input position and give output position : i = input line from file, Expected Output = [1,3,'N']
+        [i = 3, [5, 1, 'E']],                     // Read input position and give output position
     ]).test('Read input position and movement instructions and output final position of the Rover', (i, expected) => {
         let currentRover = inputValues[i].split(" ");
         currentRover = [parseInt(currentRover[0]), parseInt(currentRover[1]), currentRover[2]];
