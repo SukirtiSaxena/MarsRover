@@ -128,7 +128,7 @@ Unit test cases are provided in marsRover.test.js
 
 #### ASSUMPTION
 
-1. Plateau is rectangular / square.
+1. Plateau is rectangular / square and starting point is (0,0)
 
 
 #### FUTURE CONSIDERATIONS:
@@ -136,7 +136,7 @@ Unit test cases are provided in marsRover.test.js
 1. Plateau shape may be other than rectangle/square.
 
 ## Technologies
-npm  : Vesrion 6.14.15
+npm  : Version 6.14.15
 
 jest : Version 27.3.1
 
@@ -148,8 +148,6 @@ $ git clone https://github.com/SukirtiSaxena/MarsRover.git
 $ cd MarsRoverTask
 
 $ npm install
-
-$ npm start
 
 
 
