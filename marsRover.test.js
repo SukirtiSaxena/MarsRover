@@ -9,14 +9,14 @@ describe("myRoverMovement", () => {
         allRovers.push(inputValues[i].split(" ").slice(0, -1));
     allRovers = allRovers.map(e => [parseInt(e[0]), parseInt(e[1])]);
 
-    let boundary = inputValues[0].split(" ");
-    boundary = [parseInt(boundary[0]), parseInt(boundary[1])];
+    let plateau = inputValues[0].split(" ");
+    plateau = [parseInt(plateau[0]), parseInt(plateau[1])];
 
     each([
         [i = 1, [1, 3, 'N']],                                                   //Read input position and give output position : i = input line from file, Expected Output = [1,3,'N']
         [i = 3, [5, 1, 'E']],                                                   // Read input position and give output position
         [i = 5, 'I am Doomed... Save Me!!'],                                    // Another Rover in my way
-        [i = 7, 'MyRover can not be placed outside the plateau boundary'],      // negative input for current Rover coordinates
+        [i = 7, 'MyRover can not be placed outside the plateau plateau'],       // negative input for current Rover coordinates
         [i = 9, 'I am Doomed... Save Me!!'],                                    // myRover falling off the plateau
         [i = 11, 'Not a valid movement instruction']                            // If incorrect movement instructions
     ]).test('Read input position and give output position, if incorrect input, throw error', (i, expected) => {
@@ -25,7 +25,7 @@ describe("myRoverMovement", () => {
         currentRover = [parseInt(currentRover[0]), parseInt(currentRover[1]), currentRover[2]];
 
         input = {
-            boundary: boundary,
+            plateau: plateau,
             myRover: currentRover,
             movement: inputValues[i + 1],
             otherRovers: allRovers.filter(e => (e[0] !== currentRover[0] || e[1] !== currentRover[1]))
@@ -33,9 +33,9 @@ describe("myRoverMovement", () => {
         expect(myRoverMovement(input)).toEqual(expected);
     });
 
-    test("If  negative input for boundary coordinates, send 'Boundary limit should be in positive coordinates' message ", () => {
+    test("If  negative input for plateau coordinates, send 'plateau limit should be in positive coordinates' message ", () => {
         const input = {
-            boundary: [-5, 5],
+            plateau: [-5, 5],
             myRover: [5, 2, 'N'],
             movement: 'LMLMLMLMM',
             otherRovers: [[5, 0], [4, 5]]

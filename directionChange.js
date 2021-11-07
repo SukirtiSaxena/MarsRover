@@ -10,7 +10,7 @@ const myRoverFaceChange = (roverMovement, input, err = 0) => {
                 roverMovement === Move.Right ? input.myRover[2] = Direction.East :
                     roverMovement === Move.Move ? (
                         input.myRover[1] += 1,
-                        err = errorCheck(input.boundary[0], input.boundary[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
+                        err = errorCheck(input.plateau[0], input.plateau[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
                         err++;
             return err;
         case Direction.South:
@@ -18,7 +18,7 @@ const myRoverFaceChange = (roverMovement, input, err = 0) => {
                 roverMovement === Move.Right ? input.myRover[2] = Direction.West :
                     roverMovement === Move.Move ? (
                         input.myRover[1] -= 1,
-                        err = errorCheck(input.boundary[0], input.boundary[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
+                        err = errorCheck(input.plateau[0], input.plateau[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
                         err++;
             return err;
         case Direction.East:
@@ -26,7 +26,7 @@ const myRoverFaceChange = (roverMovement, input, err = 0) => {
                 roverMovement === Move.Right ? input.myRover[2] = Direction.South :
                     roverMovement === Move.Move ? (
                         input.myRover[0] += 1,
-                        err = errorCheck(input.boundary[0], input.boundary[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
+                        err = errorCheck(input.plateau[0], input.plateau[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
                         err++;
             return err;
         case Direction.West:
@@ -34,7 +34,7 @@ const myRoverFaceChange = (roverMovement, input, err = 0) => {
                 roverMovement === Move.Right ? input.myRover[2] = Direction.North :
                     roverMovement === Move.Move ? (
                         input.myRover[0] -= 1,
-                        err = errorCheck(input.boundary[0], input.boundary[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
+                        err = errorCheck(input.plateau[0], input.plateau[1], input.myRover[0], input.myRover[1], input.otherRovers)) :
                         err++;
             return err;
         default:
